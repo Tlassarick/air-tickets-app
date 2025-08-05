@@ -1,69 +1,93 @@
-# React + TypeScript + Vite
+**Односторінковий застосунок для перегляду та бронювання авіаквитків**  
+Реалізовано на Vite + React + TypeScript + Material-UI + Redux.  
+[Демо-API](https://679d13f487618946e6544ccc.mockapi.io/testove/v1/flights)  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## 📝 Опис проєкту
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Перегляд усіх рейсів у вигляді карток з основною інформацією.
+- Перехід до деталізації рейсу та вибір місця (зайняті/вільні місця).
+- Додавання вибраних квитків у корзину.
+- Управління корзиною: видалення окремих квитків, підрахунок загальної суми.
+- Збереження корзини в localStorage.
+- Сортування рейсів за ціною або часом.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Технології
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Vite** — збірник проекту
+- **React + TypeScript** — UI та логіка
+- **Material-UI** — сучасний дизайн та UI-компоненти
+- **Redux Toolkit** — глобальний стейт (корзина)
+- **React Router** — маршрутизація між сторінками
+- **Axios** — робота з API
+- **@mui/icons-material** — іконки для інтерфейсу
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📂 Структура основних сторінок
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- `/` — **Головна**: список усіх рейсів (FlightsPage)
+- `/flights/:id` — **Деталі рейсу**: інформація та вибір місця (FlightDetailsPage)
+- `/cart` — **Корзина**: всі додані квитки, редагування та видалення (Cart)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠️ Встановлення та запуск
+
+1. **Клонувати репозиторій:**
+    ```
+    git clone https://github.com/Tlassarick/air-tickets-app.git
+    cd air-tickets-app
+    ```
+
+2. **Встановити залежності:**
+    ```
+    npm install
+    ```
+3. **Перейти в папку:**
+    ```
+    cd flights-app
+    ```
+4. **Запустити проект у режимі розробки:**
+    ```
+    npm run dev
+    ```
+
+5. **Відкрити у браузері:**  
+    Зазвичай на [http://localhost:5173/](http://localhost:5173/)
+
+---
+
+## 📑 Основний функціонал
+
+- **Головна сторінка:**
+  - GET-запит до API, рендер карток із рейсами
+  - Сортування за ціною або часом
+  - Клік по картці — перехід до деталей рейсу
+  - Іконка «Додати в обране» (демо-функціонал)
+
+- **Сторінка деталей рейсу:**
+  - GET-запит за конкретним ID
+  - Генерація місць (10 рядів × 6 місць), рандомно зайняті місця
+  - Інтерактивний вибір місця, додавання до корзини через Redux
+  - Відображення статусу місця через іконки/кольори
+
+- **Корзина:**
+  - Список обраних квитків
+  - Можливість видаляти окремі квитки
+  - Підрахунок загальної суми
+  - Стан зберігається в localStorage
+
+---
+
+## 📦 Архітектура
+
+- `src/components/FlightsPage.tsx` — список рейсів
+- `src/components/FlightDetails.tsx` — деталізація та вибір місця
+- `src/components/Cart.tsx` — корзина квитків
+- `src/api/flightsApi.ts` — запити до API
+- `src/features/cart/CartSlice.ts` — Redux slice для корзини
+- `src/utils/seatGenerator.ts` — генерація місць
