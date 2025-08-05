@@ -40,7 +40,6 @@
 1. **Клонувати репозиторій:**
     ```
     git clone https://github.com/Tlassarick/air-tickets-app.git
-    cd air-tickets-app
     ```
 
 2. **Встановити залежності:**
@@ -49,7 +48,7 @@
     ```
 3. **Перейти в папку:**
     ```
-    cd flights-app
+    cd air-tickets-app
     ```
 4. **Запустити проект у режимі розробки:**
     ```
